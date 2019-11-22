@@ -67,13 +67,34 @@ def initialize(seme, valore)
   @seme, @valore = seme, valore
 end
 
+def valore_guerra
+  VALORE_DI_GUERRA[valore]
 end
 
 
-#c = Carta.new("cuori", "dieci")
+def to_s
+  STRINGHE_VALORE[valore] + STRINGHE_SEME[seme]
+end
 
-#puts c
+# Confronta due carte per stabilire se sono uguali in seme e valore
+def ==(other_card)
+  return false if other_card.nil?
 
-puts Carta.semi.class
+  [:seme, :valore].all? do |attr|
+    self.send(attr) == other_card.send(attr)
+  end
+end
 
-puts Carta.valori
+
+end
+
+
+c = Carta.new(:quadri,:asso)
+
+puts c
+
+p Carta.semi.include?(:cuori)
+
+p Carta.valori
+
+puts c.to_s
